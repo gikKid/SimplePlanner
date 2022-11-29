@@ -1,4 +1,4 @@
-# todo_application
+# Flutter todo_application
 
 Home project
 
