@@ -29,6 +29,8 @@ class _ViewModel extends ChangeNotifier {
   final _state = _ViewModelState();
   _ViewModelState get state => _state;
 
+  final textFieldborder = OutlineInputBorder(borderRadius: BorderRadius.circular(5));
+
   void changeLogin(String value) {
     if (_state.login == value) return;
     _state.login = value;
@@ -55,6 +57,7 @@ class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    appBar: AppBar(title: const Text(loginTitleButton),centerTitle: true,backgroundColor: Colors.orange,),
       body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Center(
@@ -64,12 +67,14 @@ class LoginWidget extends StatelessWidget {
               _ErrorTitleWidget(),
               SizedBox(height: 10),
               _LoginTextFieldWidget(),
-              SizedBox(height: 10),
+              SizedBox(height: 15),
               _PasswordTextField(),
               SizedBox(height: 10),
               _ConfirmButtonWidget(),
             ],
-          ))),
+          )
+        )
+      ),
     );
   }
 }
@@ -93,7 +98,8 @@ class _LoginTextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.read<_ViewModel>();
     return TextField(
-      decoration: const InputDecoration(labelText: loginTitle),
+      decoration: InputDecoration(labelText: loginTitle,
+      border: model.textFieldborder),
       onChanged: model.changeLogin,
     );
   }
@@ -106,21 +112,29 @@ class _PasswordTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = context.read<_ViewModel>();
     return TextField(
-      decoration: const InputDecoration(labelText: passwordTitle),
+      decoration: InputDecoration(labelText: passwordTitle,
+      border: model.textFieldborder),
       obscureText: true,
       onChanged: model.changePassword,
     );
   }
 }
 
-class _ConfirmButtonWidget extends StatelessWidget {
+class _ConfirmButtonWidget extends StatelessWidget { //FUTURE: Create reusable confirm buttons
   const _ConfirmButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+      textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+      padding: const EdgeInsets.all(10),
+      fixedSize: const Size(200, 50),
+      backgroundColor: Colors.orange,
+      foregroundColor: Colors.white,
+      ),
       onPressed: () {},
-      child: const Text("confirm"),
+      child: const Text(confirmTitle),
     );
   }
 }

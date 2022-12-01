@@ -1,12 +1,16 @@
-import 'package:flutter/cupertino.dart';
 import 'package:todo_application/domain/constants.dart';
+import 'package:flutter/material.dart';
 
-class MainNavigation { //FIXING: fix navigation push
+class MainNavigation {
   static void showLoginScreen(BuildContext context) {
-    Navigator.of(context).pushNamed(loginWidgetRouterName); 
+    Navigator.of(context).pushNamed(loginWidgetRouterName);
   }
 
   static void showRegisterScreen(BuildContext context) {
     Navigator.of(context).pushNamed(registerWidgetRouterName);
+  }
+
+  static void showMainScreen(BuildContext context) {
+    Navigator.of(context).pushNamedAndRemoveUntil(mainWidgetRouterName, (route) => false);
   }
 }
