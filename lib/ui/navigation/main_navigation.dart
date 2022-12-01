@@ -11,6 +11,12 @@ class MainNavigation {
   }
 
   static void showMainScreen(BuildContext context) {
-    Navigator.of(context).pushNamedAndRemoveUntil(mainWidgetRouterName, (route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(mainWidgetRouterName, (route) => false);
+  }
+
+  static void showStartingScreen(BuildContext context) {
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(startingWidgetRouterName, (route) => false);
   }
 }

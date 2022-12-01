@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 const startingWidgetRouterName = "starting";
 const loginWidgetRouterName = "login";
 const registerWidgetRouterName = "register";
@@ -11,6 +9,7 @@ const passwordTitle = "Password";
 const loginTitle = "Login";
 const skipButtonTitle = "Continue without login";
 const isEnteredKey = "entered";
+const isShowedOnBoardingScreen = "showedOnBoardingScreen";
 const usernameTitle = "Username";
 const emailTitle = "Email";
 const confirmPasswordTitle = "Confirm password";

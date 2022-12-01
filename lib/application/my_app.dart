@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/ui/widgets/sreens/login_widget.dart';
 import 'package:todo_application/ui/widgets/sreens/main_widget.dart';
+import 'package:todo_application/ui/widgets/sreens/onboarding_widget.dart';
 import 'package:todo_application/ui/widgets/sreens/register_widget.dart';
 import 'package:todo_application/ui/widgets/sreens/starting_widget.dart';
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+    debugShowCheckedModeBanner: false,
       title: titleNameApp,
       onGenerateRoute: (RouteSettings settings) {
         if (settings.name == startingWidgetRouterName) {
@@ -33,10 +35,16 @@ class MyApp extends StatelessWidget {
 
       },
       theme: ThemeData(
-          primaryColor: Colors.orange, scaffoldBackgroundColor: Colors.white),
+          primaryColor: Colors.orange, 
+          scaffoldBackgroundColor: Colors.white,
+          textTheme: const TextTheme(
+          bodyText1: TextStyle(color: Color(0xFF757575)),
+          bodyText2: TextStyle(color: Color(0xFF757575) )
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity
+          ),
       darkTheme: ThemeData(primaryColor: Colors.orange,backgroundColor: Colors.black),
-      home: StartingWidget
-          .create(),
+      home:OnBoardingWidget.create(),
     );
   }
 }
