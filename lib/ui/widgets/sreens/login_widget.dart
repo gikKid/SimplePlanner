@@ -94,8 +94,8 @@ class SignForm extends StatelessWidget {
         child: Column(
       children: [
         CommonTextFormField(
-          labelTitle: "Username",
-          hintTitle: "Write your username",
+          labelTitle: usernameTitle,
+          hintTitle: usernamePlaceholder,
           icon: Icons.mail_outline,
           keyboardType: TextInputType.emailAddress,
           obscureText: false,
@@ -105,8 +105,8 @@ class SignForm extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         CommonTextFormField(
-          labelTitle: "Password",
-          hintTitle: "Write your password",
+          labelTitle: passwordTitle,
+          hintTitle: passwordPlaceholder,
           icon: Icons.lock_outline,
           keyboardType: TextInputType.text,
           obscureText: true,
@@ -119,7 +119,7 @@ class SignForm extends StatelessWidget {
         ),
         const _ErrorRowWidget(),
         ContinueButton(
-        text: "Continue", 
+        text: confirmTitle, 
         press: () {}, 
         backColor: model.state.login.isNotEmpty & model.state.password.isNotEmpty ? Colors.orange : Colors.grey)
       ],

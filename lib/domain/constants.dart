@@ -14,3 +14,16 @@ const usernameTitle = "Username";
 const emailTitle = "Email";
 const confirmPasswordTitle = "Confirm password";
 const confirmTitle = "Confirm";
+const usernamePlaceholder = "Write your username";
+const passwordPlaceholder = "Write your password";
+const emailPlaceholder = "Write your email";
+const confirmPasswordPlaceholder = "Write password again";
+const emptyUsernameError = "Username is empty";
+const lengthUsernameError = "Username must be more $usernameMinLength symbols";
+const usernameMinLength = 5;
+const validationMailError = "Mail isnt correct";
+const emptyMailError = "Mail is empty";
+const emptyPasswordError = "Password is empty";
+const validationPasswordError =
+    "Password must be contains minumum 1 Upper case, minumum 1 lowercase, minimum 1 Numeric number, minimun 1 Special Character and common Allow character ( ! @ # & * ~ )";
+const matchingPasswordError = "Passwords dont match";

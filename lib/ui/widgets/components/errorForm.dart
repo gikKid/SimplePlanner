@@ -11,8 +11,8 @@ class ErrorForm extends StatelessWidget {
     return Row(
     children: [
     // const Icon(Icons.error_outline,color: Colors.red,),
-    SizedBox(width: getProportionateScreenWidth(context, 20),),
-    Text(text,style: const TextStyle(color: Colors.red),)
+    // SizedBox(width: getProportionateScreenWidth(context, 20),),
+    Expanded(child: Text(text,style: const TextStyle(color: Colors.red,fontWeight: FontWeight.w300,fontSize: 12),))
     ],
     );
   }
