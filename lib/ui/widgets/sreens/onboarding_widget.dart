@@ -5,7 +5,7 @@ import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/domain/size_config.dart';
 import 'package:todo_application/ui/navigation/main_navigation.dart';
 
-import '../components/defaultButton.dart';
+import '../components/continueButton.dart';
 
 //MARK: ViewModel
 
@@ -41,7 +41,7 @@ class _ViewModel extends ChangeNotifier {
 
   Future<void> onButtonPressed(BuildContext context) async {
     if (_currentPage == 1) {
-    (await sharedPreferences).setBool(isShowedOnBoardingScreen, true);
+      (await sharedPreferences).setBool(isShowedOnBoardingScreen, true);
       MainNavigation.showStartingScreen(context);
       return;
     }
@@ -52,7 +52,8 @@ class _ViewModel extends ChangeNotifier {
   }
 
   Future<void> didLoad() async {
-    final isShowed = (await sharedPreferences).getBool(isShowedOnBoardingScreen);
+    final isShowed =
+        (await sharedPreferences).getBool(isShowedOnBoardingScreen);
     if (isShowed != null && isShowed) {
       MainNavigation.showStartingScreen(context);
     }
@@ -66,7 +67,8 @@ class OnBoardingWidget extends StatelessWidget {
 
   static Widget create() {
     return ChangeNotifierProvider(
-        create: (context) => _ViewModel(context), child: const OnBoardingWidget());
+        create: (context) => _ViewModel(context),
+        child: const OnBoardingWidget());
   }
 
   @override
@@ -120,11 +122,11 @@ class _Body extends StatelessWidget {
                                     )),
                           ),
                           const Spacer(flex: 3),
-                          DefaultButton(
+                          ContinueButton(
                             text: model.currentPage == 1 ? "Start" : "Continue",
                             press: () {
                               model.onButtonPressed.call(context);
-                            },
+                            }, backColor: Colors.orange,
                           ),
                           const Spacer()
                         ],

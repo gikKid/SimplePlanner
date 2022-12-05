@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_application/domain/constants.dart';
+import 'package:todo_application/domain/size_config.dart';
+import 'package:todo_application/ui/widgets/components/commonTextFormField.dart';
+import 'package:todo_application/ui/widgets/components/continueButton.dart';
+import 'package:todo_application/ui/widgets/components/errorForm.dart';
 
 enum _ViewModelAuthButtonState { canConfirm, authProcess, disable }
 
@@ -29,8 +33,6 @@ class _ViewModel extends ChangeNotifier {
   final _state = _ViewModelState();
   _ViewModelState get state => _state;
 
-  final textFieldborder = OutlineInputBorder(borderRadius: BorderRadius.circular(5));
-
   void changeLogin(String value) {
     if (_state.login == value) return;
     _state.login = value;
@@ -57,84 +59,80 @@ class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    appBar: AppBar(title: const Text(loginTitleButton),centerTitle: true,backgroundColor: Colors.orange,),
-      body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Center(
+        appBar: AppBar(
+          title: const Text(loginTitleButton),
+          centerTitle: true,
+          backgroundColor: Colors.orange,
+        ),
+        body: SafeArea(
+            child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(context, 20)),
+          child: SingleChildScrollView(
+            child: SizedBox(
+              width: double.infinity,
               child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              _ErrorTitleWidget(),
-              SizedBox(height: 10),
-              _LoginTextFieldWidget(),
-              SizedBox(height: 15),
-              _PasswordTextField(),
-              SizedBox(height: 10),
-              _ConfirmButtonWidget(),
-            ],
-          )
-        )
-      ),
-    );
+                children: [
+                SizedBox(height:SizeConfig(mediaQueryData: MediaQuery.of(context)).screenHeight() * 0.25,),
+               const SignForm()],
+              ),
+            ),
+          ),
+        ))
+        );
   }
 }
 
-class _ErrorTitleWidget extends StatelessWidget {
-  const _ErrorTitleWidget({super.key});
+class SignForm extends StatelessWidget {
+  const SignForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authErrorTitle =
-        context.select((_ViewModel value) => value.state.authErrorTitle);
+    final model = context.watch<_ViewModel>();
 
-    return Text(authErrorTitle);
+    return Form(
+        child: Column(
+      children: [
+        CommonTextFormField(
+          labelTitle: "Username",
+          hintTitle: "Write your username",
+          icon: Icons.mail_outline,
+          keyboardType: TextInputType.emailAddress,
+          obscureText: false,
+          press: ((value) {
+            model.changeLogin(value);
+          }),
+        ),
+        const SizedBox(height: 20),
+        CommonTextFormField(
+          labelTitle: "Password",
+          hintTitle: "Write your password",
+          icon: Icons.lock_outline,
+          keyboardType: TextInputType.text,
+          obscureText: true,
+          press: ((value) {
+            model.changePassword(value);
+          }),
+        ),
+        SizedBox(
+          height: getProportionateScreenHeight(context, 20),
+        ),
+        const _ErrorRowWidget(),
+        ContinueButton(
+        text: "Continue", 
+        press: () {}, 
+        backColor: model.state.login.isNotEmpty & model.state.password.isNotEmpty ? Colors.orange : Colors.grey)
+      ],
+    ));
   }
 }
 
-class _LoginTextFieldWidget extends StatelessWidget {
-  const _LoginTextFieldWidget({super.key});
+class _ErrorRowWidget extends StatelessWidget {
+  const _ErrorRowWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<_ViewModel>();
-    return TextField(
-      decoration: InputDecoration(labelText: loginTitle,
-      border: model.textFieldborder),
-      onChanged: model.changeLogin,
-    );
-  }
-}
-
-class _PasswordTextField extends StatelessWidget {
-  const _PasswordTextField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final model = context.read<_ViewModel>();
-    return TextField(
-      decoration: InputDecoration(labelText: passwordTitle,
-      border: model.textFieldborder),
-      obscureText: true,
-      onChanged: model.changePassword,
-    );
-  }
-}
-
-class _ConfirmButtonWidget extends StatelessWidget { //FUTURE: Create reusable confirm buttons
-  const _ConfirmButtonWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-      textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-      padding: const EdgeInsets.all(10),
-      fixedSize: const Size(200, 50),
-      backgroundColor: Colors.orange,
-      foregroundColor: Colors.white,
-      ),
-      onPressed: () {},
-      child: const Text(confirmTitle),
-    );
+  final errorTitle = context.select((_ViewModel value) => value.state.authErrorTitle);
+    return ErrorForm(text: errorTitle);
   }
 }
