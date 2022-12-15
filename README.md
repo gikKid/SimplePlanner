@@ -7,5 +7,5 @@ Home project
 Architecture: MVVM
 
 
-Technologies: 
+Technologies: json_annotation, provider,shared_preferences, flutter_svg, image_picker
 
