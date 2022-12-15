@@ -19,4 +19,14 @@ class MainNavigation {
     Navigator.of(context)
         .pushNamedAndRemoveUntil(startingWidgetRouterName, (route) => false);
   }
+
+  static void showBlogScreen(BuildContext context) {
+    Navigator.of(context)
+        .pushNamed(blogWidgetRouterName);
+  }
+
+  static void showSettingsScreen(BuildContext context) {
+    Navigator.of(context)
+        .pushNamed(settingsWidgetRouterName);
+  }
 }

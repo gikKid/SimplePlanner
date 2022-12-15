@@ -7,7 +7,7 @@ import 'package:todo_application/ui/navigation/main_navigation.dart';
 
 import '../components/continueButton.dart';
 
-//MARK: ViewModel
+//MARK: VIEW MODEL
 
 class _ViewModel extends ChangeNotifier {
   int _currentPage = 0;
@@ -60,7 +60,7 @@ class _ViewModel extends ChangeNotifier {
   }
 }
 
-//MARK: Widget
+//MARK: WIDGET
 
 class OnBoardingWidget extends StatelessWidget {
   const OnBoardingWidget({super.key});

@@ -9,7 +9,7 @@ import '../components/continueButton.dart';
 
 enum _ViewModelAuthButtonState { canConfirm, authProcess, disable }
 
-//MARK: ViewModelState
+//MARK: VIEW MODEL STATE
 
 class _ViewModelState {
   String authErrorTitle = '';
@@ -33,7 +33,7 @@ class _ViewModelState {
   }
 }
 
-//MARK: ViewModel
+//MARK: VIEWMODEL
 
 class _ViewModel extends ChangeNotifier {
   final _state = _ViewModelState();
@@ -112,7 +112,7 @@ class _ViewModel extends ChangeNotifier {
           .hasMatch(password);
 }
 
-//MARK: RegisterWidget
+//MARK: WIDGET
 
 class RegisterWidget extends StatelessWidget {
   const RegisterWidget({super.key});

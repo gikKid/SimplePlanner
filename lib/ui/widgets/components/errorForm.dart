@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_application/domain/size_config.dart';
 
 class ErrorForm extends StatelessWidget {
   final String text;

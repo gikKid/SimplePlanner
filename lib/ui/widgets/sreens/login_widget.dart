@@ -27,7 +27,7 @@ class _ViewModelState {
   }
 }
 
-//MARK: ViewModel
+//MARK: VIEW MODEL
 
 class _ViewModel extends ChangeNotifier {
   final _state = _ViewModelState();
@@ -46,7 +46,7 @@ class _ViewModel extends ChangeNotifier {
   }
 }
 
-//MARK: LoginWidget
+//MARK: WIDGET
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({super.key});

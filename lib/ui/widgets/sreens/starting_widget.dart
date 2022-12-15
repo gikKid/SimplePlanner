@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/ui/navigation/main_navigation.dart';
 
+//MARK: VIEWMODEL
+
 class _ViewModel {
   static double buttonWidth = 150;
   static double buttonHeight = 50;
@@ -33,10 +35,10 @@ class _ViewModel {
   }
 
   Future<void> didLoad() async {
-    // final isEntered = (await sharedPreferences).getBool(isEnteredKey);
-    // if (isEntered != null && isEntered) {
-    //   MainNavigation.showMainScreen(context);
-    // }
+    final isEntered = (await sharedPreferences).getBool(isEnteredKey);
+    if (isEntered != null && isEntered) {
+      MainNavigation.showMainScreen(context);
+    }
   }
 
   Future<void> onSkipLoginButtonPressed() async {
@@ -44,6 +46,8 @@ class _ViewModel {
     MainNavigation.showMainScreen(context);
   }
 }
+
+//MARK: WIDGET
 
 class StartingWidget extends StatelessWidget {
   const StartingWidget({super.key});
