@@ -10,7 +10,7 @@ class Styles {
         brightness: isDarkTheme ? Brightness.dark : Brightness.light
       ),
       cardColor: isDarkTheme ? Colors.grey : Colors.white,
-      canvasColor: isDarkTheme ? Colors.black : Colors.grey,
+      canvasColor: isDarkTheme ? Colors.black : Colors.white,
       buttonTheme:  Theme.of(context).buttonTheme.copyWith(
         colorScheme: isDarkTheme ? const ColorScheme.dark() : const ColorScheme.light()
       )

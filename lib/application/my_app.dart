@@ -4,6 +4,7 @@ import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/domain/data_providers/dark_theme_provider.dart';
 import 'package:todo_application/domain/theme_data.dart';
 import 'package:todo_application/ui/widgets/sreens/blog_widget.dart';
+import 'package:todo_application/ui/widgets/sreens/createNote_widget.dart';
 import 'package:todo_application/ui/widgets/sreens/login_widget.dart';
 import 'package:todo_application/ui/widgets/sreens/main_widget.dart';
 import 'package:todo_application/ui/widgets/sreens/onboarding_widget.dart';
@@ -68,6 +69,10 @@ class _MyAppState extends State<MyApp> {
                 return PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) =>
                         SettingsWidget.create());
+              } else if (settings.name == createNoteRouterName) {
+                return PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        CreateNote.create());
               }
             },
             theme:

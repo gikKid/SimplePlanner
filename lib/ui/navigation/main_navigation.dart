@@ -21,12 +21,14 @@ class MainNavigation {
   }
 
   static void showBlogScreen(BuildContext context) {
-    Navigator.of(context)
-        .pushNamed(blogWidgetRouterName);
+    Navigator.of(context).pushNamed(blogWidgetRouterName);
   }
 
   static void showSettingsScreen(BuildContext context) {
-    Navigator.of(context)
-        .pushNamed(settingsWidgetRouterName);
+    Navigator.of(context).pushNamed(settingsWidgetRouterName);
+  }
+
+  static void showCreateNoteScreen(BuildContext context) {
+    Navigator.of(context).pushNamed(createNoteRouterName);
   }
 }
