@@ -4,5 +4,8 @@ Home project
 
 ## Description
 
-In progress...
+Architecture: MVVM
+
+
+Technologies: 
 
