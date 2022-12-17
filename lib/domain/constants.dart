@@ -53,3 +53,5 @@ const errorConfirmTitleAction = "Ok";
 const notesTypeId = 0;
 const addImage = "Add image";
 const dayRatingTitle = "How was your day?";
+const select = "Select";
+const cancel = "Cancel";

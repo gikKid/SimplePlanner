@@ -12,8 +12,10 @@ class Styles {
       cardColor: isDarkTheme ? Colors.grey : Colors.white,
       canvasColor: isDarkTheme ? Colors.black : Colors.white,
       buttonTheme:  Theme.of(context).buttonTheme.copyWith(
-        colorScheme: isDarkTheme ? const ColorScheme.dark() : const ColorScheme.light()
-      )
+        colorScheme: isDarkTheme ? const ColorScheme.dark() : const ColorScheme.light(),),
+      textButtonTheme: TextButtonThemeData(style: TextButton.styleFrom(
+          foregroundColor: isDarkTheme ? Colors.black : Colors.white,
+        ),)
     );
   }
 }

@@ -12,6 +12,9 @@ class BlogViewModel extends ChangeNotifier {
   ValueListenable<Object>? _listenableBox;
   var _notes = <Note>[];
   List<Note> get notes => _notes.toList();
+  bool isSelectionMode = false;
+  bool selectAll = false;
+  List<int> selectedNotes = [];
 
   BlogViewModel() {
     _setup();
@@ -31,6 +34,38 @@ class BlogViewModel extends ChangeNotifier {
 
   void userTapCreateNoteButton(BuildContext context) {
     MainNavigation.showCreateNoteScreen(context);
+  }
+
+  void userTapSelectButton() {
+    isSelectionMode = !isSelectionMode;
+    notifyListeners();
+  }
+
+  void userSelectNote(int index) {
+    if (!isSelectionMode) return;
+    if (selectedNotes.contains(index)) {
+      selectedNotes.remove(index);
+      notifyListeners();
+      return;
+    }
+    selectedNotes.add(index);
+    notifyListeners();
+  }
+
+  void userTapCancelButton() {
+    isSelectionMode = !isSelectionMode;
+    selectedNotes.clear();
+    notifyListeners();
+  }
+
+  void userTapDeleteNotes() async {
+    final box = await _notesBox;
+    for (var index in selectedNotes) {
+      box.deleteAt(index - 1);
+    }
+    selectedNotes.clear();
+    isSelectionMode = !isSelectionMode;
+    notifyListeners();
   }
 
   @override

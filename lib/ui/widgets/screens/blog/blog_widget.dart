@@ -39,13 +39,24 @@ class _BlogWidgetBody extends StatelessWidget {
         title: const Text(myBlogTitle),
         backgroundColor: Colors.orange,
         centerTitle: true,
+        actions: <Widget>[
+              if (model.isSelectionMode) IconButton(
+              onPressed: () => model.selectedNotes.isEmpty ? null : model.userTapDeleteNotes(), 
+              icon: const Icon(Icons.delete_outline),
+              color: model.selectedNotes.isEmpty ? Colors.grey: Colors.red),
+              TextButton(
+              onPressed: () => model.isSelectionMode ? model.userTapCancelButton() : model.userTapSelectButton(),
+              child: Text(
+                model.isSelectionMode ? cancel : select,
+              ))
+        ],
       ),
       body: GridView.builder(
           shrinkWrap: true,
           itemCount: model.notes.length + 1,
           padding: const EdgeInsets.all(8.0),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
+              crossAxisCount: 2,
               childAspectRatio: 2.0,
               mainAxisSpacing: 10.0,
               crossAxisSpacing: 10.0),
@@ -53,17 +64,23 @@ class _BlogWidgetBody extends StatelessWidget {
             if (index == 0) {
               return Center(
                 child: TextButton(
-                  child: const Text(createNoteTooltip),
+                  child: const Text(
+                    createNoteTooltip,
+                    style: TextStyle(color: Colors.blue),
+                  ),
                   onPressed: () => model.userTapCreateNoteButton(context),
                 ),
               );
             }
-            return Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
-                  color: Colors.orange[300]),
-              child: Text(model.notes[index - 1].name),
+            return InkWell(
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: model.selectedNotes.contains(index) ? Colors.blue : Colors.orange[300]),
+                child: Text(model.notes[index - 1].name),
+              ),
+              onTap: () => model.userSelectNote(index),
             );
           }),
     );
