@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:todo_application/services/dark_theme_prefs.dart';
 
 class DarkThemeProvider extends ChangeNotifier {

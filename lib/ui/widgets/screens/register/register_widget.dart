@@ -5,7 +5,7 @@ import 'package:todo_application/domain/size_config.dart';
 import 'package:todo_application/ui/widgets/components/commonTextFormField.dart';
 import 'package:todo_application/ui/widgets/components/errorForm.dart';
 
-import '../components/continueButton.dart';
+import '../../components/continueButton.dart';
 
 enum _ViewModelAuthButtonState { canConfirm, authProcess, disable }
 

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/ui/navigation/main_navigation.dart';
 
-import '../../../domain/data_providers/dark_theme_provider.dart';
+import '../../../../domain/data_providers/dark_theme_provider.dart';
 
 //MARK: VIEW MODEL
 

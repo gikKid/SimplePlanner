@@ -5,7 +5,7 @@ import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/domain/size_config.dart';
 import 'package:todo_application/ui/navigation/main_navigation.dart';
 
-import '../components/continueButton.dart';
+import '../../components/continueButton.dart';
 
 //MARK: VIEW MODEL
 

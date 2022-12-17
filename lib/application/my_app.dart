@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/domain/data_providers/dark_theme_provider.dart';
 import 'package:todo_application/domain/theme_data.dart';
-import 'package:todo_application/ui/widgets/sreens/blog_widget.dart';
-import 'package:todo_application/ui/widgets/sreens/createNote_widget.dart';
-import 'package:todo_application/ui/widgets/sreens/login_widget.dart';
-import 'package:todo_application/ui/widgets/sreens/main_widget.dart';
-import 'package:todo_application/ui/widgets/sreens/onboarding_widget.dart';
-import 'package:todo_application/ui/widgets/sreens/register_widget.dart';
-import 'package:todo_application/ui/widgets/sreens/settings_widget.dart';
-import 'package:todo_application/ui/widgets/sreens/starting_widget.dart';
+import 'package:todo_application/ui/widgets/screens/blog/blog_widget.dart';
+import 'package:todo_application/ui/widgets/screens/createNote/createNote_widget.dart';
+import 'package:todo_application/ui/widgets/screens/login/login_widget.dart';
+import 'package:todo_application/ui/widgets/screens/main/main_widget.dart';
+import 'package:todo_application/ui/widgets/screens/onBoarding/onboarding_widget.dart';
+import 'package:todo_application/ui/widgets/screens/register/register_widget.dart';
+import 'package:todo_application/ui/widgets/screens/settings/settings_widget.dart';
+import 'package:todo_application/ui/widgets/screens/starting/starting_widget.dart';
 
 //MARK: WIDGET
 
@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
               } else if (settings.name == blogWidgetRouterName) {
                 return PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) =>
-                        BlogWidget.create());
+                        const BlogWidget());
               } else if (settings.name == settingsWidgetRouterName) {
                 return PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) =>
