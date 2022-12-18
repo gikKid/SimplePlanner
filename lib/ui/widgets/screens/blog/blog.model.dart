@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo_application/ui/widgets/screens/note/note_widget.dart';
 
 import '../../../../domain/data_providers/box_manager.dart';
 import '../../../../entity/note.dart';
@@ -41,8 +42,11 @@ class BlogViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void userSelectNote(int index) {
-    if (!isSelectionMode) return;
+  void userSelectNote(BuildContext context, int index) {
+    if (!isSelectionMode) {
+      showNoteWidget(context, index);
+      return;
+    }
     if (selectedNotes.contains(index)) {
       selectedNotes.remove(index);
       notifyListeners();
@@ -66,6 +70,11 @@ class BlogViewModel extends ChangeNotifier {
     selectedNotes.clear();
     isSelectionMode = !isSelectionMode;
     notifyListeners();
+  }
+
+  Future<void> showNoteWidget(BuildContext context, int index) async {
+    final configuration = NoteWidgetConfiguration(noteIndex: index - 1);
+    MainNavigation.showNoteScreen(context, configuration);
   }
 
   @override

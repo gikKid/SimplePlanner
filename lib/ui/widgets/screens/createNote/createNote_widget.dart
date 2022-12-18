@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/domain/data_providers/box_manager.dart';
 import 'package:todo_application/domain/global_functions.dart';
-import 'package:todo_application/domain/size_config.dart';
+import 'package:todo_application/ui/widgets/components/noteBody.dart';
 
 import '../../../../entity/note.dart';
 
@@ -18,9 +18,20 @@ class _ViewModel extends ChangeNotifier {
   List<Uint8List> images = [];
   List<Uint8List> mockImages = [];
   String? nameText;
-  String? mainText;
+  String? _mainText;
+  String? get mainText => _mainText;
+  set mainText(String? value) {
+    if (mainText == null) {
+      _mainText = value;
+      notifyListeners();
+      return;
+    }
+    _mainText = value;
+  }
+
   String dayRatingValue = dropDownButtonData.first;
   bool get isValid => mainText != null;
+  
 
   void changeDayRatingValue(String? value) {
     if (value != null) {
@@ -89,172 +100,41 @@ class CreateNote extends StatelessWidget {
     final model = context.watch<_ViewModel>();
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(createNoteTooltip),
-          backgroundColor: Colors.orange,
-          centerTitle: true,
-        ),
-        floatingActionButton: model.isValid
-            ? FloatingActionButton(
-                tooltip: done,
-                backgroundColor: Colors.orange,
-                onPressed: (() => model.createNote(context)),
-                child: const Icon(Icons.done))
-            : null,
-        body: SafeArea(
-            child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenWidth(context, 20)),
-          child: CustomScrollView(slivers: <Widget>[
-            SliverList(
-                delegate: SliverChildListDelegate([
-              SizedBox(
-                  height: SizeConfig(mediaQueryData: MediaQuery.of(context))
-                          .screenHeight() *
-                      0.08),
-              const _NameTextFieldWidget(),
-              const SizedBox(height: 30),
-              const _NoteMainTextWidget(),
-              const SizedBox(height: 30),
-              const _DayRatingWidget(),
-              const SizedBox(height: 30),
-              const _ImagesWidget()
-            ])),
-            SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return Image.memory(
-                      model.mockImages[index],
-                      height: getProportionateScreenHeight(context, 100),
-                      width: getProportionateScreenWidth(context, 100),
-                    );
-                  },
-                  childCount: model.mockImages.length,
-                ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10.0,
-                  crossAxisSpacing: 10.0,
-                ))
-          ]),
-        )));
-  }
-}
-
-class _NameTextFieldWidget extends StatelessWidget {
-  const _NameTextFieldWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final model = context.read<_ViewModel>();
-
-    return TextField(
-      decoration: const InputDecoration(
-          filled: true,
-          fillColor: Colors.white70,
-          labelText: "Title",
-          helperText: "By default it will be set current date",
-          border: OutlineInputBorder()),
-      onChanged: (value) => model.nameText = value,
-    );
-  }
-}
-
-class _NoteMainTextWidget extends StatelessWidget {
-  const _NoteMainTextWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final model = context.read<_ViewModel>();
-
-    return TextField(
-        decoration: const InputDecoration(
-            filled: true,
-            fillColor: Colors.white70,
-            hintText: "Write what you want here",
-            border: OutlineInputBorder()),
-        maxLines: null,
-        minLines: null,
-        onChanged: (value) => model.mainText = value);
-  }
-}
-
-class _DayRatingWidget extends StatelessWidget {
-  const _DayRatingWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final model = context.watch<_ViewModel>();
-
-    return Row(
-      children: [
-        const Text(dayRatingTitle),
-        const SizedBox(
-          width: 30,
-        ),
-        DropdownButton<String>(
-            value: model.dayRatingValue,
-            items: dropDownButtonData
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (value) => model.changeDayRatingValue(value),
-            style: const TextStyle(color: Colors.blue)),
-      ],
-    );
-  }
-}
-
-class _ImagesWidget extends StatelessWidget {
-  const _ImagesWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final model = context.watch<_ViewModel>();
-
-    return ElevatedButton(
-      onPressed: () {
-        showModalBottomSheet<void>(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0))),
-          backgroundColor: Colors.grey,
-          context: context,
-          builder: (BuildContext context) {
-            return SizedBox(
-              height: 100,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    TextButton(
-                        onPressed: () async =>
-                            await model.pickImageButtonTapped(
-                                ImageSource.gallery, context),
-                        child: const Text(
-                          pickGallery,
-                        )),
-                    TextButton(
-                        onPressed: () async => await model
-                            .pickImageButtonTapped(ImageSource.camera, context),
-                        child: const Text(
-                          pickCamera,
-                        )),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.orange)),
-      child: const Text(addImage),
+      appBar: AppBar(
+        title: const Text(createNoteTooltip),
+        backgroundColor: Colors.orange,
+        centerTitle: true,
+      ),
+      floatingActionButton: model.isValid
+          ? FloatingActionButton(
+              tooltip: done,
+              backgroundColor: Colors.orange,
+              onPressed: (() => model.createNote(context)),
+              child: const Icon(Icons.done))
+          : null,
+      body: NoteBody(
+          images: model.mockImages,
+          nameTextFieldText: model.nameText ?? "",
+          nameTextFieldChanged: ((value) {
+            model.nameText = value;
+          }),
+          mainTextFieldText: model.mainText ?? "",
+          mainTextFieldChanged: ((value) {
+            model.mainText = value;
+          }),
+          dayRatingTitle: dayRatingTitle,
+          dayRatingValue: model.dayRatingValue,
+          dropDownValueChanged: ((value) {
+            model.changeDayRatingValue(value);
+          }),
+          pickGalleryButtonTapped: ((imageSource, context) {
+            model.pickImageButtonTapped(imageSource, context);
+            return null;
+          }),
+          pickCameraButtonTapped: ((imageSource, context) {
+            model.pickImageButtonTapped(imageSource, context);
+            return null;
+          })),
     );
   }
 }

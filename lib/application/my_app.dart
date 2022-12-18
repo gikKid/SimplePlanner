@@ -7,6 +7,7 @@ import 'package:todo_application/ui/widgets/screens/blog/blog_widget.dart';
 import 'package:todo_application/ui/widgets/screens/createNote/createNote_widget.dart';
 import 'package:todo_application/ui/widgets/screens/login/login_widget.dart';
 import 'package:todo_application/ui/widgets/screens/main/main_widget.dart';
+import 'package:todo_application/ui/widgets/screens/note/note_widget.dart';
 import 'package:todo_application/ui/widgets/screens/onBoarding/onboarding_widget.dart';
 import 'package:todo_application/ui/widgets/screens/register/register_widget.dart';
 import 'package:todo_application/ui/widgets/screens/settings/settings_widget.dart';
@@ -73,10 +74,16 @@ class _MyAppState extends State<MyApp> {
                 return PageRouteBuilder(
                     pageBuilder: (context, animation1, animation2) =>
                         CreateNote.create());
+              } else if (settings.name == noteWidgetRouteName) {
+                return PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) {
+                  final configuration =
+                      settings.arguments as NoteWidgetConfiguration;
+                  return NoteWidget(configuration: configuration);
+                });
               }
             },
-            theme:
-                Styles.themeData(themeProvider.darkTheme, context),
+            theme: Styles.themeData(themeProvider.darkTheme, context),
             home: OnBoardingWidget.create(),
           );
         },

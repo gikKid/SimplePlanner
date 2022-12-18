@@ -80,7 +80,7 @@ class _BlogWidgetBody extends StatelessWidget {
                     color: model.selectedNotes.contains(index) ? Colors.blue : Colors.orange[300]),
                 child: Text(model.notes[index - 1].name),
               ),
-              onTap: () => model.userSelectNote(index),
+              onTap: () => model.userSelectNote(context,index),
             );
           }),
     );

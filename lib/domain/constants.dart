@@ -5,6 +5,7 @@ const mainWidgetRouterName = "main_Route";
 const blogWidgetRouterName = "blog_Route";
 const createNoteRouterName = "createNote_Route";
 const settingsWidgetRouterName = "settings_Route";
+const noteWidgetRouteName = "note_Route";
 const loginTitleButton = "Sign in";
 const registerTitleButton = "Register";
 const titleNameApp = "Simple planner";
