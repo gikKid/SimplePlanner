@@ -5,10 +5,12 @@ import 'package:todo_application/domain/data_providers/dark_theme_provider.dart'
 import 'package:todo_application/domain/theme_data.dart';
 import 'package:todo_application/ui/widgets/screens/blog/blog_widget.dart';
 import 'package:todo_application/ui/widgets/screens/createNote/createNote_widget.dart';
+import 'package:todo_application/ui/widgets/screens/createProject/createProject_widget.dart';
 import 'package:todo_application/ui/widgets/screens/login/login_widget.dart';
 import 'package:todo_application/ui/widgets/screens/main/main_widget.dart';
 import 'package:todo_application/ui/widgets/screens/note/note_widget.dart';
 import 'package:todo_application/ui/widgets/screens/onBoarding/onboarding_widget.dart';
+import 'package:todo_application/ui/widgets/screens/projects/projects_widget.dart';
 import 'package:todo_application/ui/widgets/screens/register/register_widget.dart';
 import 'package:todo_application/ui/widgets/screens/settings/settings_widget.dart';
 import 'package:todo_application/ui/widgets/screens/starting/starting_widget.dart';
@@ -81,6 +83,14 @@ class _MyAppState extends State<MyApp> {
                       settings.arguments as NoteWidgetConfiguration;
                   return NoteWidget(configuration: configuration);
                 });
+              } else if (settings.name == projectsWidgetRouteName) {
+                return PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        const ProjectsWidget());
+              } else if (settings.name == createProjectRouteName) {
+                return PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        CreateProjectWidget.create());
               }
             },
             theme: Styles.themeData(themeProvider.darkTheme, context),

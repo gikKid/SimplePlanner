@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+    splashColor: Colors.transparent,
       scaffoldBackgroundColor: isDarkTheme ?  Colors.black : Colors.white,
       primaryColor: Colors.orange,
       colorScheme:ThemeData().colorScheme.copyWith(

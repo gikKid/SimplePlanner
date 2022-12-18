@@ -37,4 +37,14 @@ class MainNavigation {
     Navigator.of(context)
         .pushNamed(noteWidgetRouteName, arguments: configuration);
   }
+
+  static void showProjectsScreen(BuildContext context) {
+    Navigator.of(context)
+        .pushNamed(projectsWidgetRouteName);
+  }
+
+  static void showCreateProjectScreen(BuildContext context) {
+    Navigator.of(context)
+        .pushNamed(createProjectRouteName);
+  }
 }

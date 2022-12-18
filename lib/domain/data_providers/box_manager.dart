@@ -1,6 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_application/domain/constants.dart';
 import 'package:todo_application/entity/note.dart';
+import 'package:todo_application/entity/project.dart';
 
 class BoxManager {
   final Map<String, int> _boxCounter = <String, int>{};
@@ -11,6 +12,10 @@ class BoxManager {
 
   Future<Box<Note>> openNotesBox() async {
     return _openBox("notes_box", notesTypeId, NoteAdapter());
+  }
+
+  Future<Box<Project>> openProjectsBox() {
+    return _openBox("projects_box", projectTypeId, ProjectAdapter());
   }
 
   Future<Box<T>> _openBox<T>(

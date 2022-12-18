@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_application/domain/constants.dart';
-import 'package:todo_application/ui/widgets/screens/blog/blog.model.dart';
+import 'package:todo_application/ui/widgets/screens/blog/blog_model.dart';
 
 //MARK: WIDGET
 
@@ -44,6 +44,9 @@ class _BlogWidgetBody extends StatelessWidget {
               onPressed: () => model.selectedNotes.isEmpty ? null : model.userTapDeleteNotes(), 
               icon: const Icon(Icons.delete_outline),
               color: model.selectedNotes.isEmpty ? Colors.grey: Colors.red),
+              if (model.isSelectionMode) TextButton(
+              onPressed: () => model.userTapSelectAll(),
+               child: Text(model.selectAll ? deselectAll : selectAll)),
               TextButton(
               onPressed: () => model.isSelectionMode ? model.userTapCancelButton() : model.userTapSelectButton(),
               child: Text(

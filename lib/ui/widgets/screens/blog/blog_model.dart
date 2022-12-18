@@ -38,6 +38,26 @@ class BlogViewModel extends ChangeNotifier {
     MainNavigation.showCreateNoteScreen(context);
   }
 
+  void userTapSelectAll() {
+    if (selectAll) {
+      selectedNotes.clear();
+      selectedKeys.clear();
+    } else {
+      var index = 1;
+      for (var note in _notes) {
+        if (!selectedKeys.contains(note.key)) {
+          selectedKeys.add(note.key);
+        }
+        if (!selectedNotes.contains(index)) {
+          selectedNotes.add(index);
+        }
+        index++;
+      }
+    }
+    selectAll = !selectAll;
+    notifyListeners();
+  }
+
   void userTapSelectButton() {
     isSelectionMode = !isSelectionMode;
     notifyListeners();
@@ -50,11 +70,15 @@ class BlogViewModel extends ChangeNotifier {
     }
     if (selectedNotes.contains(index)) {
       selectedNotes.remove(index);
-      selectedKeys.removeAt(index - 1);
+      final selectedNote = _notes[index - 1];
+      selectedKeys.remove(selectedNote.key);
+      if (selectedNotes.isEmpty) {
+        selectAll = false;
+      }
       notifyListeners();
       return;
     }
-    final selectedNote = notes[index-1];
+    final selectedNote = notes[index - 1];
     selectedKeys.add(selectedNote.key);
     selectedNotes.add(index);
     notifyListeners();
@@ -64,6 +88,7 @@ class BlogViewModel extends ChangeNotifier {
     isSelectionMode = !isSelectionMode;
     selectedNotes.clear();
     selectedKeys.clear();
+    selectAll = false;
     notifyListeners();
   }
 

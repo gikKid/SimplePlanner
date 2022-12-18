@@ -15,6 +15,10 @@ class _ViewModel extends ChangeNotifier {
   void userTapBlogButton(BuildContext context) {
     MainNavigation.showBlogScreen(context);
   }
+
+  void userTapProjectsButton(BuildContext context) {
+    MainNavigation.showProjectsScreen(context);
+  }
 }
 
 //MARK: WIDGET
@@ -78,15 +82,27 @@ class _DrawerWidget extends StatelessWidget {
             title: const Text(myBlogTitle),
             onTap: () => model.userTapBlogButton(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.favorite),
+          ExpansionTile(
             title: const Text(favoriteTitle),
-            onTap: () {},
+            leading: const Icon(Icons.favorite),
+            expandedAlignment: Alignment.topLeft,
+            children: [
+              TextButton(
+                  onPressed: () {},
+                  child: const Text("test1",
+                      style: TextStyle(color: Colors.blue))),
+              TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "test2",
+                    style: TextStyle(color: Colors.blue),
+                  ))
+            ],
           ),
           ListTile(
             leading: const Icon(Icons.folder_copy_sharp),
             title: const Text(projectsTitle),
-            onTap: () {},
+            onTap: () => model.userTapProjectsButton(context),
           ),
         ],
       ),
