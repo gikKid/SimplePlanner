@@ -16,6 +16,7 @@ class BlogViewModel extends ChangeNotifier {
   bool isSelectionMode = false;
   bool selectAll = false;
   List<int> selectedNotes = [];
+  List<int> selectedKeys = [];
 
   BlogViewModel() {
     _setup();
@@ -49,9 +50,12 @@ class BlogViewModel extends ChangeNotifier {
     }
     if (selectedNotes.contains(index)) {
       selectedNotes.remove(index);
+      selectedKeys.removeAt(index - 1);
       notifyListeners();
       return;
     }
+    final selectedNote = notes[index-1];
+    selectedKeys.add(selectedNote.key);
     selectedNotes.add(index);
     notifyListeners();
   }
@@ -59,15 +63,17 @@ class BlogViewModel extends ChangeNotifier {
   void userTapCancelButton() {
     isSelectionMode = !isSelectionMode;
     selectedNotes.clear();
+    selectedKeys.clear();
     notifyListeners();
   }
 
   void userTapDeleteNotes() async {
     final box = await _notesBox;
-    for (var index in selectedNotes) {
-      box.deleteAt(index - 1);
+    for (var key in selectedKeys) {
+      box.delete(key);
     }
     selectedNotes.clear();
+    selectedKeys.clear();
     isSelectionMode = !isSelectionMode;
     notifyListeners();
   }
