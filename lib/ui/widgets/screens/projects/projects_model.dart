@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_application/domain/data_providers/box_manager.dart';
 import 'package:todo_application/ui/navigation/main_navigation.dart';
+import 'package:todo_application/ui/widgets/screens/project/project_widget.dart';
 
 import '../../../../entity/project.dart';
 
@@ -32,6 +33,11 @@ class ProjectsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> _showProjectScreen(BuildContext context, int index) async {
+    final configuration = ProjectWidgetConfiguration(projectIndex: index - 1);
+    MainNavigation.showProjectScreen(context, configuration);
+  }
+
   void userTapCreateProject(BuildContext context) {
     MainNavigation.showCreateProjectScreen(context);
   }
@@ -58,7 +64,7 @@ class ProjectsViewModel extends ChangeNotifier {
 
   void userSelectProject(BuildContext context, int index) {
     if (!isSelectionMode) {
-      //FUTURE: show project screen
+      _showProjectScreen(context, index);
       return;
     }
     if (selectedProjects.contains(index)) {
@@ -88,7 +94,7 @@ class ProjectsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-    void userTapDeleteProjects() async {
+  void userTapDeleteProjects() async {
     final box = await _projectsBox;
     for (var key in selectedKeys) {
       box.delete(key);
@@ -102,7 +108,7 @@ class ProjectsViewModel extends ChangeNotifier {
   @override
   void dispose() async {
     _listenableBox?.removeListener(() => _readProjectsFromHive());
-    BoxManager.shared.closeBox((await _projectsBox));
+    await BoxManager.shared.closeBox((await _projectsBox));
     super.dispose();
   }
 }

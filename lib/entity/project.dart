@@ -37,10 +37,10 @@ class ProjectCategory {
 
 class ProjectTask {
   String name;
-  String description;
+  String? description;
   bool isFinished;
   int priority;
-  DateTime time;
+  DateTime? time;
   DateTime timeFinished;
 
   ProjectTask({

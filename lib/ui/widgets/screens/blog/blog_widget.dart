@@ -12,17 +12,15 @@ class BlogWidget extends StatefulWidget {
 }
 
 class _BlogWidgetState extends State<BlogWidget> {
-  final _model = BlogViewModel();
 
   @override
   Widget build(BuildContext context) {
     return BlogWidgetModelProvider(
-        model: _model, child: const _BlogWidgetBody());
+        model: BlogViewModel(), child: const _BlogWidgetBody());
   }
 
   @override
   void dispose() {
-    _model.dispose();
     super.dispose();
   }
 }

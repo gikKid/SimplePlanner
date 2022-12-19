@@ -1,6 +1,7 @@
 import 'package:todo_application/domain/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_application/ui/widgets/screens/note/note_widget.dart';
+import 'package:todo_application/ui/widgets/screens/project/project_widget.dart';
 
 class MainNavigation {
   static void showLoginScreen(BuildContext context) {
@@ -46,5 +47,10 @@ class MainNavigation {
   static void showCreateProjectScreen(BuildContext context) {
     Navigator.of(context)
         .pushNamed(createProjectRouteName);
+  }
+
+  static void showProjectScreen(BuildContext context, ProjectWidgetConfiguration configuration) {
+    Navigator.of(context)
+        .pushNamed(projectRouteName, arguments: configuration);
   }
 }

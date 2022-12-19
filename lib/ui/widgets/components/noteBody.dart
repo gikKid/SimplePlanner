@@ -178,10 +178,7 @@ class _ImagesWidget extends StatelessWidget {
           backgroundColor: Colors.grey,
           context: context,
           builder: (BuildContext context) {
-            return SizedBox(
-              height: 100,
-              child: Center(
-                child: Column(
+            return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -199,9 +196,7 @@ class _ImagesWidget extends StatelessWidget {
                           pickCamera,
                         )),
                   ],
-                ),
-              ),
-            );
+                );
           },
         );
       },

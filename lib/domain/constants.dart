@@ -10,6 +10,7 @@ const settingsWidgetRouterName = "settings_Route";
 const noteWidgetRouteName = "note_Route";
 const projectsWidgetRouteName = "projects_Route";
 const createProjectRouteName = "createProject_Route";
+const projectRouteName = "project_Route";
 const loginTitleButton = "Sign in";
 const registerTitleButton = "Register";
 const titleNameApp = "Simple planner";
@@ -65,6 +66,9 @@ const createProject = "Create project";
 const selectAll = "Select all";
 const deselectAll = "Deselect all";
 const color = "Color";
+const description = "Description";
+const priority = "Priority";
+const priorityData = ["High", "Medium", "Low"];
 
 List<CustomColorData> colorsData = [
   CustomColorData(hex: "b8256f", name: "Berry red"),
